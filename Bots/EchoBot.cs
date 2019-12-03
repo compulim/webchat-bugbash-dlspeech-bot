@@ -13,7 +13,7 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var replyText = $"Echo: {turnContext.Activity.Text}\nYour user ID is {turnContext.Activity.From.Id}";
+            var replyText = $"Echo: {turnContext.Activity.Text}\n\nYour user ID is {turnContext.Activity.From.Id}.\n\nYour conversation ID is {turnContext.Activity.Conversation.Id}.";
             await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
         }
 
@@ -24,7 +24,9 @@ namespace Microsoft.BotBuilderSamples.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"{welcomeText}\nYour user ID is {member.Id}", $"{welcomeText}\nYour user ID is {member.Id}"), cancellationToken);
+                    var customWelcomeText = $"{welcomeText}\n\nYour user ID is {member.Id}.\n\nYour conversation ID is {turnContext.Activity.Conversation.Id}."
+
+                    await turnContext.SendActivityAsync(MessageFactory.Text(customWelcomeText, customWelcomeText), cancellationToken);
                 }
             }
         }
