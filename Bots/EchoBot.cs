@@ -24,7 +24,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    var customWelcomeText = $"{welcomeText}\n\nYour user ID is {member.Id}.\n\nYour conversation ID is {turnContext.Activity.Conversation.Id}."
+                    var customWelcomeText = $"{welcomeText}\n\nYour user ID is {member.Id}.\n\nYour conversation ID is {turnContext.Activity.Conversation.Id}.";
 
                     await turnContext.SendActivityAsync(MessageFactory.Text(customWelcomeText, customWelcomeText), cancellationToken);
                 }
